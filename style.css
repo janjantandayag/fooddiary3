@@ -338,6 +338,8 @@ input, select {
     background-size: cover;
     position: relative;
     margin: 0 auto;
+    margin-top: 46px;
+    margin-bottom: 46px;
 }
 
 .displayNone{
@@ -351,12 +353,23 @@ input, select {
     transition: .5s all;
 
 }
+.showAllRange{
+    display: block;
+    background: #ffffff;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    font-family: novathin;
+    text-transform: lowercase;
+    font-weight: bold;
+    color: #b9b9b9;
+}
 /* VERTICAL LINE */
 .circumplexHeading--helper{
     display: inline-block;
 }
 #helpCircumplexdialog{
-    max-width:900px;
+    width:900px;
+    max-width: 100%;
 }
 #help-circumplex{
     display: inline-block;
@@ -680,10 +693,6 @@ input, select {
 }
 .span-start-head span, .span-end-head span{
     font-family: novaThin;
-}
-#rangeForm{
-    border-bottom: 1px dotted #eeb10c;
-    margin-bottom: 10px;
 }
 .bodyImg{
     width: 100%;
@@ -1375,6 +1384,47 @@ input[type='file']{
     border-bottom: 1px dotted #000;
     padding-bottom: 20px;
 }
+.rangeFormContainer{
+    background:#fff;
+    margin-left:0px;
+    margin-right:0px;
+    margin-top:35px;    
+    -webkit-box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
+    -moz-box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
+    box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
+}
+.rangeLabel{
+    margin-top:10px;
+    margin-left: 13px;
+    margin-bottom: 15px;
+    color:#989898;
+    font-style: italic;
+    font-family: novaThin;
+}
+.showDates{
+    background: #fff;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.rangeShowDateHeader{
+    text-transform: uppercase;
+    font-family: semiBold;
+    color:#676565;
+    margin-left: 15px;
+    display: inline;
+}
+.rangeTo{
+    font-family: novathin;
+    font-weight: bold;
+    color: #cccccc;
+}
+.rangeStart,.rangeEnd{
+    font-family: novaThin;
+    color: #eeb10c;
+    font-weight: bold;
+    padding-bottom: 5px;
+    border-bottom:1px solid #eeb10c;
+}
 
 
 @media(max-width:375px){
@@ -1552,7 +1602,6 @@ input[type='file']{
         margin-bottom:  0px;
     }
     .recentContainer{
-        text-align: center;
         max-width:300px;
         margin:20px auto;
     }

@@ -49,6 +49,41 @@
 			</div>
 		</div>
 	</header>
+	<section>
+		<div class="container ">
+			<div class="row rangeFormContainer">
+				<p class="rangeLabel"> *To display result for other dates, just change starting and ending dates below.</p>
+				<form id="rangeForm" method="GET" action="dashboard.php">
+					<div class="col-md-5 col-sm-5">		
+					  <div class="form-group">
+					    <label for="start" class="labelDate">Start date:</label>
+					    <input type="date" class="form-control" id="start" required name="startDate" max="<?= date("Y-m-d"); ?>">
+					  </div>
+					</div>
+					<div class="col-md-5 col-sm-5">			
+					  <div class="form-group">
+					    <label for="end" class="labelDate">End date:</label>
+					    <input type="date" class="form-control" id="end" required name="endDate" max="<?= date("Y-m-d"); ?>">
+					  </div>
+					</div>
+					<div class="col-md-2">
+				  		<button type="submit" class="rangeSubmit" >Submit</button>
+					</div>
+				</form>				
+			</div>
+			<?php 
+				if(isset($_GET['startDate']) && isset($_GET['endDate'])){
+			?>
+			<div class="showDates">
+				<p class="rangeShowDateHeader">Showing results for: </p>
+				<span class="rangeStart"><?= date("M d,Y",strtotime($_GET['startDate'])); ?></span>
+				<span class="rangeTo"> up to  </span>
+				<span class="rangeEnd"><?= date("M d,Y",strtotime($_GET['endDate'])); ?></span>
+			</div>
+			<a href="dashboard.php" class="showAllRange"> show all entries </a>
+			<?php } ?>
+		</div>
+	</section>
 	<section id="visualization">
 		<div class="container">
 			<div class="row">
@@ -64,7 +99,17 @@
 						<div class="mealEntryContainer">
 							<p class="mealLabelName"><?= $db->getMealName($id); ?></p>
 							<div class="entryCountContainer">
-								<p class="entryCount"><?= $db->countTotalEntries($id); ?></p>
+								<p class="entryCount">
+								<?php
+									if(isset($_GET['startDate']) && isset($_GET['endDate'])){
+										echo $db->countTotalEntriesDate($id,$_GET['startDate'],$_GET['endDate']);
+									} 
+									else{
+										echo $db->countTotalEntries($id); 
+									}
+								?>									
+
+								</p>
 								<p class="entryLevel">entries</p>
 							</div>
 						</div>
@@ -72,7 +117,16 @@
 						<div class="totalCountContainer">
 							<p class="totalCount">Total</p>
 							<div class="entryCountContainer">
-								<p class="totalEntryCount"><?= $db->getTotalEntry(); ?></p>
+								<p class="totalEntryCount">
+								<?php 
+									if(isset($_GET['startDate']) && isset($_GET['endDate'])){
+										echo $db->getTotalEntryDate($_GET['startDate'],$_GET['endDate']);
+									} 
+									else{
+										echo $db->getTotalEntry(); 
+									}
+								?>								
+								</p>
 								<p class="totalLabel">entries</p>
 							</div>
 						</div>
@@ -82,40 +136,6 @@
 					<div class="visualizationContainer">
 						<div class="circumplex-header">
 							<h3 class="circumplexTitle">Food Distribution (Circumplex Model)</h3>
-							<?php
-								if(isset($_GET['startDate']) && isset($_GET['endDate'])): ?>
-								<a href="dashboard.php" style="color: #b5b5b5;display: inline-block;position: relative;top: 15px;font-family: novaThin; font-weight: bold;text-transform: lowercase;"> RESET</a>
-							<?php endif; ?>
-						</div>
-						<div class="range-circumplex" style="margin-top:15px">
-							<form id="rangeForm" method="GET" action="dashboard.php">
-								<div class="row">
-									<div class="col-md-5 col-sm-5">		
-									  <div class="form-group">
-									    <label for="start" class="labelDate">Start date:</label>
-									    <input type="date" class="form-control" id="start" required name="startDate" max="<?= date("Y-m-d"); ?>">
-									  </div>
-									</div>
-									<div class="col-md-5 col-sm-5">			
-									  <div class="form-group">
-									    <label for="end" class="labelDate">End date:</label>
-									    <input type="date" class="form-control" id="end" required name="endDate" max="<?= date("Y-m-d"); ?>">
-									  </div>
-									</div>
-									<div class="col-md-2">
-								  		<button type="submit" class="rangeSubmit" >Submit</button>
-									</div>
-								</div>
-							</form>
-							<?php
-								if(isset($_GET['startDate']) && isset($_GET['endDate'])):
-									?>
-								<p class="span-start-head">Start Date: <span> <?= date("M d,Y", strtotime($_GET['startDate'] ))?></span></p>
-								<p class="span-end-head">End Date:  <span><?= date("M d,Y", strtotime($_GET['endDate'])) ?></span></p>
-								<p class="span-count">Entries: <span><?= $db->countEntries($_GET['startDate'],$_GET['endDate']); ?></span></p>
-								<?php
-								endif;
-							?>
 						</div>
 						<div class="circumplex-body" style="margin-top:5px">		
 							<div class="circumplex-model" id="circumplex-model">	
@@ -223,8 +243,14 @@ Highcharts.chart('statChart', {
     series: [
     <?php 
     	foreach($emotions as $emotion){
-    		echo "{ name: '".strtoupper($emotion['emotion_name'])."',";
-    		echo "data: [".$db->getEmotionCount($emotion['emotion_id'])."], color:'".$db->getBgColor($emotion['emotion_id'])."'},";
+    		echo "{ name: '".strtoupper($emotion['emotion_name'])."',";   		
+			if(isset($_GET['startDate']) && isset($_GET['endDate'])){	
+				$countEmotion = $db->getEmotionCountDate($emotion['emotion_id'],$_GET['startDate'],$_GET['endDate']);
+			}
+			else{				
+				$countEmotion = $db->getEmotionCount($emotion['emotion_id']);
+			}
+    		echo "data: [".$countEmotion."], color:'".$db->getBgColor($emotion['emotion_id'])."'},";
     	}
     ?>
     ]
@@ -260,7 +286,13 @@ Highcharts.chart('statChartByMeal', {
     		echo "{ name: '".strtoupper($emotion['emotion_name'])."',";
     		echo "data: [";
     		foreach($mids as $mid){
-    		echo $db->getValue($emotion['emotion_id'],$mid).',';
+				if(isset($_GET['startDate']) && isset($_GET['endDate'])){	
+					$stackCount = $db->getValueDate($emotion['emotion_id'],$mid,$_GET['startDate'],$_GET['endDate']);
+				}
+				else{
+					$stackCount = $db->getValue($emotion['emotion_id'],$mid);
+				}
+    			echo $stackCount.',';
     		}
     		echo "], color:'".$db->getBgColor($emotion['emotion_id'])."'},";
     	}

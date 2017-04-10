@@ -138,6 +138,7 @@ Class Database {
  		$result = $stmt->fetchAll();
  		return $result;
 	}
+
 	public function getBgColor($emotionId){
 		if($emotionId==1){
 			$color='#ecec1c';
@@ -168,6 +169,16 @@ Class Database {
 	public function getEmotionCount($emotionId){
 		$uid = $_SESSION['userId'];
 		$stmt = $this->conn->prepare("SELECT * FROM entries,item WHERE user_id = $uid AND emotion_id=$emotionId AND item.entry_id = entries.entry_id");
+ 		$stmt->execute();
+		$count = $stmt->rowCount();
+		if(!$count){
+			$count = 0;
+		}
+		return $count;
+	}
+	public function getEmotionCountDate($emotionId,$start,$end){
+		$uid = $_SESSION['userId'];
+		$stmt = $this->conn->prepare("SELECT * FROM entries,item WHERE user_id = $uid AND emotion_id=$emotionId AND item.entry_id = entries.entry_id AND DATE_FORMAT(date_eaten,'%Y-%m-%d')  >= '$start' AND DATE_FORMAT(date_eaten,'%Y-%m-%d')  <= '$end'");
  		$stmt->execute();
 		$count = $stmt->rowCount();
 		if(!$count){
@@ -227,7 +238,27 @@ Class Database {
 		}
 		return $count;
 	}
-	public function getvalue($eid,$mid){
+	public function countTotalEntriesDate($id,$start,$end){
+		$uid = $_SESSION['userId'];
+		$stmt = $this->conn->prepare("SELECT * FROM entries,item WHERE user_id = $uid AND meal_id=$id AND item.entry_id = entries.entry_id AND DATE_FORMAT(date_eaten,'%Y-%m-%d')  >= '$start' AND DATE_FORMAT(date_eaten,'%Y-%m-%d')  <= '$end'");
+ 		$stmt->execute();
+		$count = $stmt->rowCount();
+		if(!$count){
+			$count = 0;
+		}
+		return $count;
+	}
+	public function getValueDate($eid,$mid,$start,$end){
+		$uid = $_SESSION['userId'];
+		$stmt = $this->conn->prepare("SELECT * FROM entries,item WHERE user_id = $uid AND meal_id=$mid  AND emotion_id=$eid AND item.entry_id = entries.entry_id AND DATE_FORMAT(date_eaten,'%Y-%m-%d')  >= '$start' AND DATE_FORMAT(date_eaten,'%Y-%m-%d')  <= '$end'");
+ 		$stmt->execute();
+		$count = $stmt->rowCount();
+		if(!$count){
+			$count = 0;
+		}
+		return $count;
+	}
+	public function getValue($eid,$mid){
 		$uid = $_SESSION['userId'];
 		$stmt = $this->conn->prepare("SELECT * FROM entries,item WHERE user_id = $uid AND meal_id=$mid  AND emotion_id=$eid AND item.entry_id = entries.entry_id");
  		$stmt->execute();
@@ -240,6 +271,16 @@ Class Database {
 	public function getTotalEntry(){
 		$uid = $_SESSION['userId'];
 		$stmt = $this->conn->prepare("SELECT * FROM entries,item WHERE user_id = $uid AND item.entry_id = entries.entry_id");
+ 		$stmt->execute();
+		$count = $stmt->rowCount();
+		if(!$count){
+			$count = 0;
+		}
+		return $count;
+	}
+	public function getTotalEntryDate($start,$end){
+		$uid = $_SESSION['userId'];
+		$stmt = $this->conn->prepare("SELECT * FROM entries,item WHERE user_id = $uid AND item.entry_id = entries.entry_id AND DATE_FORMAT(date_eaten,'%Y-%m-%d')  >= '$start' AND DATE_FORMAT(date_eaten,'%Y-%m-%d')  <= '$end'");
  		$stmt->execute();
 		$count = $stmt->rowCount();
 		if(!$count){
