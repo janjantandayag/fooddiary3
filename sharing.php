@@ -27,8 +27,8 @@
         <div class="col-md-12">
           <div class="sharingContent-top">
             <div class="user-datecontainerMobile">
-              <span class="user-date"><?= date("M d, Y",strtotime($result['entry_date'])); ?></span>
-              <span class="user-time"><?= date("H:i:s A",strtotime($result['entry_date'])); ?></span>
+              <span class="user-date"><?= date("M d, Y",strtotime($result['date_eaten'])); ?></span>
+              <span class="user-time"><?= date("h:i:s A",strtotime($result['date_eaten'])); ?></span>
               <span class="user-meal"><?= $result['meal_name']; ?></span>
             </div>
             <div>
@@ -37,8 +37,8 @@
               <span class="user-emotion"><?= $result['emotion_name']; ?></span>
             </div>
             <div class="user-datecontainer">
-              <span class="user-date"><?= date("M d, Y",strtotime($result['entry_date'])); ?></span>
-              <span class="user-time"><?= date("H:i:s A",strtotime($result['entry_date'])); ?></span>
+              <span class="user-date"><?= date("M d, Y",strtotime($result['date_eaten'])); ?></span>
+              <span class="user-time"><?= date("h:i:s A",strtotime($result['date_eaten'])); ?></span>
               <span class="user-meal"><?= $result['meal_name']; ?></span>
             </div>
           </div>

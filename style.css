@@ -371,6 +371,10 @@ input, select {
     width:900px;
     max-width: 100%;
 }
+#servingSizeModalDialog{
+    width:700px;
+    max-width: 100%;    
+}
 #help-circumplex{
     display: inline-block;
     font-size: 120%;
@@ -379,6 +383,12 @@ input, select {
 }
 #help-circumplex:hover{
     color:#eeb10c;
+}
+.servingSizeRef{
+    font-family: novaThin;
+    margin-top: 20px;
+    color: #4a4a4a;
+    font-weight: bold;
 }
 .circumplex-model:before{
     position: absolute;
@@ -1319,7 +1329,6 @@ input[type='file']{
     margin-bottom: 20px;
     display: none;
 }
-
 .user-date{
     font-size:112.5%;
     font-family: semiBold;
@@ -1425,8 +1434,88 @@ input[type='file']{
     padding-bottom: 5px;
     border-bottom:1px solid #eeb10c;
 }
-
-
+#index-banner{
+    background: url(img/index-bg.jpg) no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+    padding:100px 0;
+}
+.index-banner-logo{
+    max-width: 150px;
+}
+.index-foodAppName{
+    color:#fff;
+    font-family: semiBold;
+    font-size: 300%;
+    text-transform: uppercase;
+    margin-top:25px;
+    margin-bottom: 50px;
+}
+.index-foodAppDescription{
+    font-family: novaThin;
+    color: #fefefe;
+    font-size: 150%;
+    background-color: rgba(0, 0, 0, .5);
+    padding: 25px 10px;
+    text-align: justify;
+    font-weight: bold;
+    line-height: 120%;
+}
+#features{
+    padding:25px 0px 50px 0;
+}
+.feature{
+    text-align: center;
+    margin-top:40px;
+}
+.feature .fa{
+    font-size:350%;
+    color:#f0ba2a;  
+    margin-bottom: 10px;
+}
+.feature-name{
+    text-transform: uppercase;
+    color:#797877;
+    font-family: semiBold;
+    font-size: 125%;
+    margin-bottom: 20px;
+}
+.feature-description{
+    color:#505050;
+    line-height: 120%;
+    font-size:110%;
+    font-weight: bold;
+    font-family: novaThin;
+}
+#signin{
+    text-align: center;
+    padding:20px 0;
+    background: #f3f3f3;
+}
+.index-signinButton{
+    color:#fff;
+    background:#eeb10c;
+    font-family: semiBold;
+    padding:15px 50px;
+    text-transform: uppercase;
+    font-size: 125%;
+    display: inline-block;
+    border:1px solid transparent;
+}
+.index-signinButton:hover{
+    color:#eeb10c;
+    background:#fff;
+    text-decoration: none;
+    transition: .5s all;
+    border:1px solid #eeb10c;
+}
+.signInHeader{
+    font-size: 150%;
+    font-family: semiBold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #4c4c4c;
+}
 @media(max-width:375px){
     .user-datecontainerMobile{
         display: block;

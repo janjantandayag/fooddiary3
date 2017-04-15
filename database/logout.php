@@ -5,5 +5,5 @@
    	$_SESSION['detail'] = [];
 	echo "<script>
 		alert('Logged out successfully!');
-		window.location = '../index.php';
+		window.location = '../sign-in.php';
 	  </script>";

@@ -129,7 +129,7 @@
 										echo $dateFormatted;
 									?>
 								</p>
-								<a href="http://www.facebook.com/sharer/sharer.php?u=http://diary.x10.mx/sharing.php?itemId=<?= $meal['item_id']; ?>" class="share" value=""><span class="fa fa-facebook" style="margin-right:5px"></span> Share</a>
+								<a href="http://www.facebook.com/sharer/sharer.php?u=http://diary.x10.mx/sharing.php?id=<?= $db->generateRandomString(); ?>&itemId=<?= $meal['item_id']; ?>&bogus=<?=$db->generateRandomString();?>" class="share" value=""><span class="fa fa-facebook" style="margin-right:5px"></span> Share</a>
 							</div>
 						</div>				
 					</div>			

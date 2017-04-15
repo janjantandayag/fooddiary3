@@ -43,6 +43,15 @@ Class Database {
 		$_SESSION['name'] = $firstName;
 		header("location: ../dashboard.php");
 	}
+	public function generateRandomString() {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < 1000; $i++) {
+           $randomString .= $characters[rand(0, $charactersLength - 1)];
+       }
+        return $randomString;
+    }
 	public function updatePassUser($username,$password){
 		$uid = $_SESSION['userId'];
 		$stmt = $this->conn->prepare("UPDATE users SET username =:username,password=md5(:password) WHERE user_id=$uid"); 
@@ -54,7 +63,7 @@ Class Database {
  		echo "<script>
 			alert('Password/Username updated!');
 			alert('Please login to continue!');
-			window.location = './index.php';
+			window.location = './sign-in.php';
 		  </script>";
 	}
 
@@ -65,7 +74,7 @@ Class Database {
 			echo "
 				<script>
 					alert('You are not login! Please login to continue!');
-					window.location = './index.php';
+					window.location = './sign-in.php';
 				</script>
 			";
 		}

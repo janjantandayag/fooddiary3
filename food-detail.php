@@ -3,7 +3,7 @@
 	include('database/connection.php');
     $db = new Database;
     $db->isLogin();    
-    if(!isset($_SESSION['detail']['emotionId'])){
+    if(!isset($_SESSION['detail']['emotionId']) || !isset($_SESSION['detail']['mealType'])){
     	echo "<script>alert('Oops! Please select meal type first!')</script>";
     	echo "<script>window.location.href='add-entry.php'</script>";
     }
@@ -18,7 +18,7 @@
 			    // Multiple images preview in browser
 			    function generate(){
 			    	var text = "";
-				    var possible = "0123456789";
+				    var possible = "123456789";
 				    for(var i = 0; i < 10; i++) {
 				        text += possible.charAt(Math.floor(Math.random() * possible.length));
 				    }
@@ -31,7 +31,7 @@
 			                var reader = new FileReader();
 			                reader.onload = function(event) {
 	            				var id = generate();
-			                	var html = '<div class="col-md-3 col-sm-3 itemContainer" id="photo-'+id+'"> <div class="form-group"> <input type="button" value="remove" class="removeButton" onclick="remove('+id+');"/> <img src="'+event.target.result+'" class="imgPreview"/> <label for="foodName" class="labelFood">Food Name</label><input type="text" class="form-control" id="foodName" name="foodName[]" required /> </div> <div class="form-group"><label for="servingSize" class="labelFood">Serving Size</label><input type="text" class="form-control" id="servingSize" name="servingSize[]" required></div><div class="form-group"><label for="description" class="labelFood">Description</label><textarea class="form-control" id="description" name="description[]" required></textarea></div><div class="form-group"><label for="servingSize" class="labelFood">Time Eaten</label><p style="font-family: novaThin;color:#8a8989;font-weight: bold;margin-bottom: 4px;font-style: italic">Default time is the current time</p><input type="time" class="form-control" name="time[]" value="<?php echo date('H:i'); ?>" required />	</div></div>';
+			                	var html = '<div class="col-md-3 col-sm-3 itemContainer" id="photo-'+id+'"> <div class="form-group"> <!-- <input type="button" value="remove" class="removeButton" onclick="remove('+id+');"/> --> <img src="'+event.target.result+'" class="imgPreview"/> <label for="foodName" class="labelFood">Food Name</label><input type="text" class="form-control" id="foodName"  name="foodName[]" required /> </div> <div class="form-group"><label for="servingSize" class="labelFood">Serving Size</label><a href="#" data-toggle="modal" title="Click for further info" data-target="#servingModal"><span class="fa fa-question" style="float: right;color:#eeb10c;font-size:110%"></span></a><input type="text" placeholder = "(1 cup, 1 slice, 170g)" class="form-control" id="servingSize" name="servingSize[]" required></div><div class="form-group"><label for="description" class="labelFood">Description</label><textarea class="form-control" id="description" name="description[]" required></textarea></div><div class="form-group"><label for="servingSize" class="labelFood">Time Eaten</label><p style="font-family: novaThin;color:#8a8989;font-weight: bold;margin-bottom: 4px;font-style: italic">Default time is the current time</p><input type="time" class="form-control" name="time[]" value="<?php echo date('H:i'); ?>" required />	</div></div>';
 			                	$(placeToInsertImagePreview).append(html);
 			                }
 			                reader.readAsDataURL(input.files[i]);
@@ -39,10 +39,12 @@
 			        }
 			    };
 			    $('#file-photo-90').on('change', function() {
-			    	if ($('#file-photo-90').get(0).files.length === 0) {			    		
-						$('.detailSubmit').attr("disabled","disabled");
+			    	$('.itemContainer').remove();
+			    	if ($('#file-photo-90').get(0).files.length === 0) {	
+						$('.detailSubmit').css("display","none");
 			    	}
 			    	else{			    		
+						$('.detailSubmit').css("display","block");
 						$('.detailSubmit').removeAttr("disabled");
 			    	}			    	
 		        	imagesPreview(this, 'div.gallery');	
@@ -52,16 +54,19 @@
 			function remove(id){
 				if(confirm('Are you sure you want to remove?')){
 					$("#photo-"+id).remove();
-					if ($('#file-photo-90').get(0).files.length === 0) {			    		
+					if ($('#file-photo-90').get(0).files.length === 0) {	
+						$('.detailSubmit').css("display","none");
 						$('.detailSubmit').attr("disabled","disabled");
-			    	}
-			    	else{			    		
-						$('.detailSubmit').removeAttr("disabled");
-			    	}
-			  	}else{
-		      	return false;
+			    	}			    	
+			    	// var names = [];
+				    // for (var i = 0; i < $('#file-photo-90').get(0).files.length; ++i) {
+				    //     names.push($('#file-photo-90').get(0).files[i]);
+				    // }
+			  	}
+			  	else{
+		      		return false;
 		 	 	}
-			}		
+			}
 		</script>
 </head>
 <body class="mainPage">
@@ -134,11 +139,12 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">						
-					  	<input type="submit" name="addDiary" class="detailSubmit"   value="Add to Diary" disabled/>
+					  	<input type="submit" name="addDiary" class="detailSubmit"   value="Add to Diary" disabled style="display: none" />
 					</div>				  	
 					</form>
 					<?php
 						if(isset($_POST['addDiary'])){
+							echo "<script>document.getElementById('file-photo-90').files.length = 50;</script>";
 							$userId = $_SESSION['userId'];
 							$emotionId = $_SESSION['detail']['emotionId'];
 							$mealId = $_SESSION['detail']['mealType'];
@@ -151,13 +157,13 @@
 							$entryId=mysqli_insert_id($conn);		
 							$dateEaten = $_SESSION['detail']['date'];
 							for($i=0;$i<count($_POST['foodName']);$i++){
-								$photo = addslashes(file_get_contents($_FILES["deg90"]["tmp_name"][$i]));
-								$name = mysqli_real_escape_string($conn,strtolower($_POST['foodName'][$i]));
-								$serving = mysqli_real_escape_string($conn,strtolower($_POST['servingSize'][$i]));
-								$description = mysqli_real_escape_string($conn,strtolower($_POST['description'][$i]));
-								$time = date("H:i",strtotime($_POST['time'][$i]));
-								$dateTimeEaten = $dateEaten.' '.$time;
-								$insertItem = mysqli_query($conn, "INSERT INTO item(entry_id,food_name,food_description,serving_size,photo,date_eaten) VALUE($entryId,'$name','$description','$serving','$photo','$dateTimeEaten')");
+								  $photo = addslashes(file_get_contents($_FILES["deg90"]["tmp_name"][$i]));
+								  $name = mysqli_real_escape_string($conn,strtolower($_POST['foodName'][$i]));
+								  $serving = mysqli_real_escape_string($conn,strtolower($_POST['servingSize'][$i]));
+								  $description = mysqli_real_escape_string($conn,strtolower($_POST['description'][$i]));
+								  $time = date("H:i",strtotime($_POST['time'][$i]));
+								  $dateTimeEaten = $dateEaten.' '.$time;
+								  $insertItem = mysqli_query($conn, "INSERT INTO item(entry_id,food_name,food_description,serving_size,photo,date_eaten) VALUE($entryId,'$name','$description','$serving','$photo','$dateTimeEaten')");
 							}
 							echo "<script>alert('Successfully added!');window.location.href='archive.php';</script>";
 						}
@@ -179,6 +185,38 @@
 			  <source src="video/food-detail.mp4" type="video/ogg">
 			  Your browser does not support HTML5 video.
 			</video>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div id="servingModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog" id="servingSizeModalDialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Sample Serving Sizes</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="row">
+	      		<div class="col-md-12">
+	      			<img src="img/servingsize-1.jpg" width="100%" />
+	      		</div>
+	      		<div class="col-md-12">
+	      			<img src="img/servingsize-2.jpg" width="100%" />
+	      		</div>
+	      		<div class="col-md-12">
+	      			<img src="img/servingsize-3.jpg" width="100%" />
+	      		</div>
+	      		<div class="col-md-12">
+	      			<img src="img/servingsize-4.jpg" width="100%" />
+	      		</div>
+	      		<div class="col-md-12">
+	      			<img src="img/servingsize-5.jpg" width="100%" />
+	      		</div>
+	      		<div class="col-md-12">
+	      			<p class="servingSizeRef">https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/serve-sizes</p>
+	      		</div>
+	      	</div>
 	      </div>
 	    </div>
 	  </div>

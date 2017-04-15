@@ -1,132 +1,57 @@
-<?php
-	include ('database/Function.php');	
-	if(isset($_SESSION['loggedIn']) == true){
-		echo "<script>
-			alert('You are currently logged in! Please logged to used another account');
-			window.location = 'dashboard.php';
-		</script>";
-	}
-	else{
-?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome</title>
+	<title>Food Diary App - Welcome</title>
 	<?php include ('include/links.php'); ?>
 </head>
 <body>
-	<section id="mainPage">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">	
-					<div class="form-container">
-						<div class="form--header">
-							<img src="img/logo.png" class="img-logo"/>
-							<h1>Food Diary App</h1>
-						</div>
-						<div class="form--body">
-							<div class="form">
-								<form action="index.php" method="POST">
-									<input type="text" class="form-control" name='username' required placeholder="username" />
-									<input type="password" class="form-control" name='password' required placeholder="password" />
-									<input type="submit" name='submit' value="Log in" />
-								</form>
-								<?php
-									$db = new Database;
-									if(isset($_POST['submit'])){
-										$username = htmlspecialchars(strtolower($_POST['username']));
-										$password = htmlspecialchars(strtolower($_POST['password']));
-										if($db->isExist($username,$password)){
-											$db->login($username,$password);
-										}
-										else{ ?>
-								<div class="message">
-									<p>Incorrect username or password! Please try again!</p>
-								</div>
-								<?php		
-									}
-								}
-								?>
-							</div>
-						</div>
-						<div class="form--footer">
-							<a href="#" data-toggle="modal" data-target="#myModal">Create an account</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					  <!-- Indicators -->
-					  <ol class="carousel-indicators">
-					    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					    <li data-target="#myCarousel" data-slide-to="1"></li>
-					  </ol>
-					  <!-- Wrapper for slides -->
-					  <div class="carousel-inner" role="listbox">
-					    <div class="item active">
-					      <img src="img/mobile-carousel.png" alt="Mobile View">
-					    </div>
-					    <div class="item">
-					      <img src="img/web-carousel.png" alt="Desktop View">
-					    </div>
-					  </div>
-				</div>
-			</section>
-		</div>
-	</div>	
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sign Up</h4>
-      </div>
-      <div class="modal-body">
-      	<form id="signUpForm" method="POST" action="database/Function.php">
-      		<div class="row marginTop">
-      			<div class="col-md-6 col-sm-6">
-		      		<label for="firstName">First Name</label>
-		    		<input type="text" class="form-control" name="firstName" id="firstName" required>
-		    	</div>
-      			<div class="col-md-6 col-sm-6">
-		      		<label for="lastName">Last Name</label>
-		    		<input type="text" class="form-control" name="lastName" id="lastName" required>
-		    	</div>
-	    	</div>
-	    	<div class="row marginTop">
-      			<div class="col-md-6 col-sm-6">
-		      		<label for="gender">Gender</label>
-		    		<select id="gender" name="gender" class="form-control" required>
-		    			<option value="male">Male</option>
-		    			<option value="female">Female</option>
-		    		</select>
-		    	</div>
-      			<div class="col-md-6 col-sm-6">
-		      		<label for="birthDate">Date of Birth</label>
-		    		<input type="date" name="birthDate" class="form-control" id="birthDate" required>
-		    	</div>
-	    	</div>
-	    	<div class="row marginTop">
-      			<div class="col-md-6 col-sm-6">
-		      		<label for="username">Username</label>
-		      		<input type="text" class="form-control" id="username" name="username" required/>
-		    	</div>
-      			<div class="col-md-6 col-sm-6">
-		      		<label for="password">Password</label>
-		    		<input type="password" name="password" class="form-control" id="password" required>
-		    	</div>
-	    	</div>
-	    	<input type="submit" name="signUp" id="signUpButton" value="Sign up"/>
-      	</form>
+  <section id="index-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <img class="index-banner-logo" src="img/logo.png" />
+          <h1 class="index-foodAppName">Food diary app</h1>
+          <p class="index-foodAppDescription">
+            Food diaries are an excellent way to track what you're eating. But how about tracking your eating behaviour based on your emotions? Would it be possible? Yes! Food Diary App is all you need. <br/><br/>Food Diary App is a place where you can actively track each meal of the day based on your current emotion. This online emotion-based food diary application greatly helps anyone who wants to see what they’re really eating and start making some changes. Food Diary App is a free, secure way to keep track of your food intake. The benefits of journaling for food tracking are substantial and free.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<script>
-	$('.message').fadeOut(5000);	
-</script>
+  </section>
+  <section id="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-4 feature">
+          <span class="fa fa-cutlery"></span>
+          <h2 class="feature-name">Add Entries</h2>
+          <p class="feature-description">
+            Food Diary App lets you create new entries for each day or each meal (breakfast, lunch, dinner, snacks). In creating a new entry, users are first asked about their current emotion and plot it in the Circumplex Model of Emotions. 
+          </p>
+        </div>
+        <div class="col-md-4 col-sm-4 feature">
+          <span class="fa fa-calendar-o"></span>
+          <h2 class="feature-name">View Entries</h2>
+          <p class="feature-description">
+            Tracking your food entries in Food Diary App is an easy task. It is presented in a calendar manner for a quicker navigation. You can view your entries by clicking the specific dates. 
+          </p>
+        </div>
+        <div class="col-md-4 col-sm-4 feature">
+          <span class="fa fa-dashboard"></span>
+          <h2 class="feature-name">Dashboard</h2>
+          <p class="feature-description">
+            This lets you see the visualization of the summary of your food diary. It displays your total food intake entries by meal. It also shows the food distribution in the Circumplex Model, graphs of your food intake per emotion and by meal per emotion. Your recent food entries are also displayed in this feature. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="signin">
+    <div class="container">
+      <div class="row">
+        <p class="signInHeader">start yours today and take your food diary to a new level</p>
+        <a href="sign-in.php" class="index-signinButton">Sign in</a>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
-<?php } ?>
