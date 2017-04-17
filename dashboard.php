@@ -153,7 +153,7 @@
 									foreach($entries as $entry){ ?>						
 								<div class="circumplexFood" style="left:<?=$entry['xCoor'];?>%;top:<?=$entry['yCoor']-5;?>%">
 									<h5 class="circumplexFoodName"><?=$entry['food_name'];?></h5>
-									<img src="database/displayImage.php?itemId=<?=$entry['item_id']?>" style="border:<?= $db->getBorderColor($entry['emotion_id']); ?>;" class="circumplexFoodImg" />
+									<img src="data:image/jpeg;base64,<?=$db->displayImage($entry['item_id']); ?>" style="border:<?= $db->getBorderColor($entry['emotion_id']); ?>;" class="circumplexFoodImg" />
 								</div>
 									<?php }	?>
 							</div>		
@@ -200,7 +200,7 @@
 				<div class="row recent-container">
 					<?php foreach($db->getRecentEntries() as $recent) { ?>
 					<div class="col-md-3 col-sm-6 recentContainer">
-						<img class="recentEntriesImg" src="database/displayImage.php?itemId=<?=$recent['item_id'] ?>" />
+						<img class="recentEntriesImg" src="data:image/jpeg;base64,<?=$db->displayImage($recent['item_id']); ?>" />
 						<div class="recentEntriesDesc">
 							<p class="recentFoodName"><?=$recent['food_name'] ?> </p>
 							<p class="recentEntriesDate"><span style="margin-right:5px" class="fa fa-calendar-plus-o"></span><?= date("M d,Y @h:i:s A",strtotime($recent['date_added'])) ?></p>

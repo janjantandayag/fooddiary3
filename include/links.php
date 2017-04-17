@@ -6,5 +6,5 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="script.js"></script>
 <link rel="stylesheet" type="text/css" href="fontAwesome/css/font-awesome.min.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 <!-- <script src="https://use.fontawesome.com/0c7a3095b5.js"></script> -->

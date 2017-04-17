@@ -106,10 +106,10 @@
 					 	endif;
 						foreach($db->getMeals($id) as $meal):
 					?>
-					<div class="entryContainer" id="itemView-<?=$meal?>">
+					<div class="entryContainer" id="itemView-<?=$meal['item_id'];?>">
 						<div class="row">
 							<div class="col-md-4">
-								<img src="database/displayImage.php?itemId=<?=$meal ['item_id']; ?>" class="bodyImg"/>
+								<img src="data:image/jpeg;base64,<?= $db->displayImage($meal['item_id']); ?>" class="bodyImg"/>
 							</div>
 							<div class="col-md-8 ">
 								<h2 class="entryName"><?= $meal['food_name']; ?></h2>

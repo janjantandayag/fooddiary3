@@ -1516,6 +1516,9 @@ input[type='file']{
     margin-bottom: 20px;
     color: #4c4c4c;
 }
+.inputEmpty{
+    border: 1px solid red;
+}
 @media(max-width:375px){
     .user-datecontainerMobile{
         display: block;

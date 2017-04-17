@@ -66,7 +66,6 @@ Class Database {
 			window.location = './sign-in.php';
 		  </script>";
 	}
-
 	public function isLogin(){
 		if(isset($_SESSION['loggedIn'])){
 		}
@@ -147,7 +146,6 @@ Class Database {
  		$result = $stmt->fetchAll();
  		return $result;
 	}
-
 	public function getBgColor($emotionId){
 		if($emotionId==1){
 			$color='#ecec1c';
@@ -304,6 +302,12 @@ Class Database {
  		$result = $stmt->fetchAll();
  		return $result;
 	}	
+	public function displayImage($itemId){
+		$stmt = $this->conn->prepare("SELECT photo from item WHERE item_id=$itemId"); 
+ 		$stmt->execute(); 
+ 		$result = $stmt->fetch();
+ 		return $result['photo'];
+	}
 }
 
 $db = new Database;

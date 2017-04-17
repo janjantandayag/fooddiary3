@@ -3,6 +3,9 @@
 	include('database/connection.php');
     $db = new Database;
     $db->isLogin();    
+    if(isset($_GET['foodName'])){
+    	echo "<script>window.location.href='archive.php';</script>";
+    }
     if(!isset($_SESSION['detail']['emotionId']) || !isset($_SESSION['detail']['mealType'])){
     	echo "<script>alert('Oops! Please select meal type first!')</script>";
     	echo "<script>window.location.href='add-entry.php'</script>";
@@ -15,7 +18,6 @@
 	<?php include ('include/links.php'); ?>
 	<script>
 			$(function() {
-			    // Multiple images preview in browser
 			    function generate(){
 			    	var text = "";
 				    var possible = "123456789";
@@ -31,7 +33,7 @@
 			                var reader = new FileReader();
 			                reader.onload = function(event) {
 	            				var id = generate();
-			                	var html = '<div class="col-md-3 col-sm-3 itemContainer" id="photo-'+id+'"> <div class="form-group"> <!-- <input type="button" value="remove" class="removeButton" onclick="remove('+id+');"/> --> <img src="'+event.target.result+'" class="imgPreview"/> <label for="foodName" class="labelFood">Food Name</label><input type="text" class="form-control" id="foodName"  name="foodName[]" required /> </div> <div class="form-group"><label for="servingSize" class="labelFood">Serving Size</label><a href="#" data-toggle="modal" title="Click for further info" data-target="#servingModal"><span class="fa fa-question" style="float: right;color:#eeb10c;font-size:110%"></span></a><input type="text" placeholder = "(1 cup, 1 slice, 170g)" class="form-control" id="servingSize" name="servingSize[]" required></div><div class="form-group"><label for="description" class="labelFood">Description</label><textarea class="form-control" id="description" name="description[]" required></textarea></div><div class="form-group"><label for="servingSize" class="labelFood">Time Eaten</label><p style="font-family: novaThin;color:#8a8989;font-weight: bold;margin-bottom: 4px;font-style: italic">Default time is the current time</p><input type="time" class="form-control" name="time[]" value="<?php echo date('H:i'); ?>" required />	</div></div>';
+			                	var html = '<div class="col-md-3 col-sm-3 itemContainer" id="photo-'+id+'"> <div class="form-group"><input type="button" value="remove" class="removeButton" onclick="remove('+id+');"/> <img src="'+event.target.result+'" class="imgPreview imgPreviewSrc" /> <label for="foodName" class="labelFood">Food Name</label><input type="text" class="form-control foodName" name="foodName[]" required /> </div> <div class="form-group"><label for="servingSize" class="labelFood">Serving Size</label><a href="#" data-toggle="modal" title="Click for further info" data-target="#servingModal"><span class="fa fa-question" style="float: right;color:#eeb10c;font-size:110%"></span></a><input type="text" placeholder = "(1 cup, 1 slice, 170g)" class="form-control servingSize" name="servingSize[]" required></div><div class="form-group"><label for="description" class="labelFood">Description</label><textarea class="form-control description" name="description[]" required></textarea></div><div class="form-group"><label for="servingSize" class="labelFood">Time Eaten</label><p style="font-family: novaThin;color:#8a8989;font-weight: bold;margin-bottom: 4px;font-style: italic">Default time is the current time</p><input type="time" class="form-control timeEaten" name="time[]" value="<?php echo date('H:i'); ?>" required />	</div></div>';
 			                	$(placeToInsertImagePreview).append(html);
 			                }
 			                reader.readAsDataURL(input.files[i]);
@@ -39,7 +41,6 @@
 			        }
 			    };
 			    $('#file-photo-90').on('change', function() {
-			    	$('.itemContainer').remove();
 			    	if ($('#file-photo-90').get(0).files.length === 0) {	
 						$('.detailSubmit').css("display","none");
 			    	}
@@ -54,19 +55,12 @@
 			function remove(id){
 				if(confirm('Are you sure you want to remove?')){
 					$("#photo-"+id).remove();
-					if ($('#file-photo-90').get(0).files.length === 0) {	
-						$('.detailSubmit').css("display","none");
-						$('.detailSubmit').attr("disabled","disabled");
-			    	}			    	
-			    	// var names = [];
-				    // for (var i = 0; i < $('#file-photo-90').get(0).files.length; ++i) {
-				    //     names.push($('#file-photo-90').get(0).files[i]);
-				    // }
 			  	}
 			  	else{
 		      		return false;
 		 	 	}
 			}
+			
 		</script>
 </head>
 <body class="mainPage">
@@ -125,7 +119,7 @@
 		<div class="mainPageFoodDetailContainer">
 			<div class="container foodDetailContainer">
 				<div class="row">					
-					<form action='food-detail.php' method="POST" enctype="multipart/form-data">			
+					<form onsubmit="submitThis();">			
 						<div class="col-md-12">			
 							<div class="degree90">
 								<label for="file-photo-90" class="custom-file-take">
@@ -135,40 +129,12 @@
 							</div>
 						</div>
 						<div class="gallery">
-						</div>						
-				</div>
-				<div class="row">
-					<div class="col-md-12">						
-					  	<input type="submit" name="addDiary" class="detailSubmit"   value="Add to Diary" disabled style="display: none" />
-					</div>				  	
-					</form>
-					<?php
-						if(isset($_POST['addDiary'])){
-							echo "<script>document.getElementById('file-photo-90').files.length = 50;</script>";
-							$userId = $_SESSION['userId'];
-							$emotionId = $_SESSION['detail']['emotionId'];
-							$mealId = $_SESSION['detail']['mealType'];
-							$posX = $_SESSION['detail']['posX'];
-							$posY = $_SESSION['detail']['posY'];	
-							$deg = $_SESSION['detail']['deg'];
-							$dateAdded = date("Y-m-d H:i:s");
-							$insertIntoEntry = mysqli_query($conn, "INSERT INTO entries(user_id,emotion_id,meal_id,date_added,entry_angle,xCoor,yCoor) VALUE($userId,$emotionId,$mealId,'$dateAdded','$deg',$posX,$posY)");
-
-							$entryId=mysqli_insert_id($conn);		
-							$dateEaten = $_SESSION['detail']['date'];
-							for($i=0;$i<count($_POST['foodName']);$i++){
-								  $photo = addslashes(file_get_contents($_FILES["deg90"]["tmp_name"][$i]));
-								  $name = mysqli_real_escape_string($conn,strtolower($_POST['foodName'][$i]));
-								  $serving = mysqli_real_escape_string($conn,strtolower($_POST['servingSize'][$i]));
-								  $description = mysqli_real_escape_string($conn,strtolower($_POST['description'][$i]));
-								  $time = date("H:i",strtotime($_POST['time'][$i]));
-								  $dateTimeEaten = $dateEaten.' '.$time;
-								  $insertItem = mysqli_query($conn, "INSERT INTO item(entry_id,food_name,food_description,serving_size,photo,date_eaten) VALUE($entryId,'$name','$description','$serving','$photo','$dateTimeEaten')");
-							}
-							echo "<script>alert('Successfully added!');window.location.href='archive.php';</script>";
-						}
-					?>			
-				</div>
+						</div>				
+						<div class="col-md-12">						
+						  	<input type="submit" name="addDiary" class="detailSubmit" value="Add to Diary" disabled style="display: none" />
+						</div>
+					</form>		
+				</div>	
 			</div>
 		</div>
 	</div>
@@ -221,5 +187,32 @@
 	    </div>
 	  </div>
 	</div>
+<script>
+	function submitThis(){
+		var src = [];
+		var name = [];
+		var size = [];
+		var description = [];
+		var time = [];
+		$('.imgPreviewSrc').each(function() {
+            src.push($(this).attr('src'));
+        });	
+        $('.foodName').each(function() {
+            name.push($(this).val());
+        });
+        $('.servingSize').each(function() {
+            size.push($(this).val());
+        });
+        $('.description').each(function() {
+            description.push($(this).val());
+        });
+        $('.timeEaten').each(function() {
+            time.push($(this).val());
+        });
+        $.post("database/add-diary.php",{srcs:src,names:name,sizes:size,descriptions:description,times:time},function(data){
+        	alert('Successfully added!');
+        });
+	}
+</script>
 </body>
 </html>
