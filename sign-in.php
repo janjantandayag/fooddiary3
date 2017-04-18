@@ -104,7 +104,7 @@
 		    	</div>
       			<div class="col-md-6 col-sm-6">
 		      		<label for="birthDate">Date of Birth</label>
-		    		<input type="date" name="birthDate" class="form-control" id="birthDate" required>
+		    		<input type="date" name="birthDate" class="form-control" id="birthDate" max="<?= date('Y-m-d')?>"  required>
 		    	</div>
 	    	</div>
 	    	<div class="row marginTop">
@@ -114,7 +114,7 @@
 		    	</div>
       			<div class="col-md-6 col-sm-6">
 		      		<label for="password">Password</label>
-		    		<input type="password" name="password" class="form-control" id="password" required>
+		    		<input type="password" name="password" class="form-control" pattern=".{6,}" title="6 characters minimum" id="password" required>
 		    	</div>
 	    	</div>
 	    	<input type="submit" name="signUp" id="signUpButton" value="Sign up"/>

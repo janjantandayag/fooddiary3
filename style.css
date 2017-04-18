@@ -1481,11 +1481,12 @@ input[type='file']{
     margin-bottom: 20px;
 }
 .feature-description{
-    color:#505050;
-    line-height: 120%;
-    font-size:110%;
+    color: #505050;
+    line-height: 150%;
+    font-size: 110%;
     font-weight: bold;
     font-family: novaThin;
+    text-align: justify;
 }
 #signin{
     text-align: center;
@@ -1515,6 +1516,7 @@ input[type='file']{
     text-transform: uppercase;
     margin-bottom: 20px;
     color: #4c4c4c;
+    line-height: 150%;
 }
 .inputEmpty{
     border: 1px solid red;
@@ -1536,7 +1538,11 @@ input[type='file']{
 
 
 
-
+@media(max-width:265px){
+    .form--header h1{
+        font-size: 150%;
+    }
+}
 @media(max-width:990px){
     .fc-title{
         font-size: 100%;
@@ -1690,6 +1696,15 @@ input[type='file']{
     }
 }
 @media screen and (max-width:768px){
+    #index-banner{
+        padding-top:50px;
+    }
+    .index-foodAppName{
+        font-size:200%;
+    }
+    .index-foodAppDescription{
+        font-size:120%;
+    }
     .recentEntriesImg{
         margin-bottom:  0px;
     }

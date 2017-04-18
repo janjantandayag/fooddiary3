@@ -78,6 +78,14 @@ Class Database {
 			";
 		}
 	}
+	public function indexCheckLogin(){
+		if(isset($_SESSION['loggedIn'])){
+			echo "<script>
+				window.location.href='dashboard.php';
+			</script>
+			";
+		}
+	}
 	public function getUserDetails(){
 		$uid = $_SESSION['userId'];
 		$stmt = $this->conn->prepare("SELECT * FROM users WHERE user_id = $uid"); 

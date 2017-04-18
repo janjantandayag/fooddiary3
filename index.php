@@ -1,3 +1,8 @@
+<?php
+  include('database/Function.php');
+  $db = new Database;
+  $db->indexCheckLogin();
+?>
 <!DOCTYPE html>
 <html>
 <head>
