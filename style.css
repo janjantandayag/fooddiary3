@@ -1562,6 +1562,9 @@ input[type='file']{
     font-family: semiBold;
     color: #959090;
 }
+.btn-warning{
+    background:#eeb10c;
+}
 @media screen and (max-width:375px){
     .user-datecontainerMobile{
         display: block;
@@ -1604,10 +1607,25 @@ input[type='file']{
         margin:0 auto;
     }
 }
+@media screen and (max-width: 493px){
+    .date-entry{
+        display: block;
+        float: none;
+        margin-top: 10px;
+    }
+}
 @media(max-width:772px) and (min-width:500px){
     .imgPreview{
         padding-top:60px;
         padding-bottom: 10px;
+        transition:1s all;
+    }
+}
+@media(max-width:365px){
+    .breadcrumb-link{
+        margin-right:10px;
+        font-size:75%;
+        transition:1s all;
     }
 }
 @media(max-width:1199px) and (min-width:991px){

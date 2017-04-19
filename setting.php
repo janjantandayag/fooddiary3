@@ -38,14 +38,14 @@
               </div>
               <div class="form-group">
                   <label>Password</label>
-                  <input type="password" id="password" class="form-control" placeholder="Enter password" name="password" required >
+                  <input type="password" id="password" class="form-control" placeholder="Enter password" onchange="checkLength();" name="password" required >
               </div>
               <div class="form-group">
                   <label>Retype Password</label>
-                  <input type="password" id="retype" class="form-control" onchange="isTheSame();" placeholder="Retype password" required>
+                  <input type="password" id="retype" class="form-control" onchange="isTheSame(); " placeholder="Retype password" required>
                   <p id="alert"></p>
               </div>
-              <button id="buttonChange" name="updatePassword" type="submit" class="btn btn-warning" onclick="check();">Update Details</button>
+              <button id="buttonChange" name="updatePassword" type="submit" class="btn btn-warning" onclick="check();">Update</button>
               <p id="alert"></p>
           </form>
           <?php 
@@ -76,7 +76,7 @@
                             <label>Date of Birth</label>
                             <input class="form-control" id="birthDate" type="date" value="<?= date("Y-m-d",strtotime($userDetail['date_of_birth']))?>"name="middlename" required>
                         </div>
-                        <button type="button" class="btn btn-warning" onclick="updateUserDetails();">Update Profile</button>
+                        <button type="button" class="btn btn-warning" onclick="updateUserDetails();">Update</button>
                         <p id="alertSuccess" style="padding-top: 20px"></p>
           </form>
        </div>
@@ -85,8 +85,15 @@
 	</section>
 </body>
 <script>
+function checkLength(){
+  value = $('#password').val();
+  if(value.length < 6){
+    alert('Password should be 6 characters minimum!');
+    $('#password').val('');
+  }
+}
 function check(){
-  if(confirm('Are you sure you want to update the name?')){
+  if(confirm('Are you sure you want to udpate username/password?')){
   }
   else
   {
@@ -108,7 +115,7 @@ function isTheSame(){
   }
 }
 function updateUserDetails(){
-  if(confirm('Are you sure you want to update the name?')){
+  if(confirm('Are you sure you want to update your profile?')){
       var firstName = document.getElementById('firstName').value;
       var lastName = document.getElementById('lastName').value;
       var gender = document.getElementById('gender').value;

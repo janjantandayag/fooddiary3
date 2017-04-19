@@ -15,7 +15,7 @@
 						<li <?= $db->isActive($currentPage,['add-entry.php','circumplex.php','food-detail.php'],'web'); ?> ><a href="add-entry.php"><span class="fa fa-plus-square-o"></span>add entry</a></li>	
 						<li <?= $db->isActive($currentPage,['dashboard.php'],'web'); ?> ><a href="dashboard.php"><span class="fa fa-dashboard"></span>dashboard</a></li>
 						<li><a href="documentation.php" target="_blank"><span class="fa fa-list-ol"></span>steps</a></li>
-						<li  class="userNav"><a href="#"><span class="fa fa-user"></span> Hello, <?= $_SESSION['name'] ?></a>
+						<li  class="userNav"><a href="#" ><span class="fa fa-user"></span> Hello, <span id="topName"><?= $_SESSION['name'] ?></span></a>
                         <div class="dropdown-content">
 					    	<a href="setting.php" <?= $db->isActive($currentPage,['setting.php'],'web'); ?> ><span class="fa fa-gear"></span>settings</a>
 					    	<a href="database/logout.php"><span class="fa fa-power-off"></span>logout</a>

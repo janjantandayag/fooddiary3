@@ -35,7 +35,7 @@
 			<div class="row breadcrumbContainer">
 				<div class="col-md-12">
 					<a href="dashboard.php" class="breadcrumb-link"><span class="fa fa-dashboard"></span> dashboard</a>
-					<a href="#"  class="breadcrumb-link  breadcrumb-link-active"><span class="fa fa-plus-square-o"></span> add entry</a>
+					<a href="add-entry.php"  class="breadcrumb-link  breadcrumb-link-active"><span class="fa fa-plus-square-o"></span> add entry</a>
 					<a href="#" id="help-circumplex" data-toggle="modal" title="Click for further info" data-target="#myModal"><span class="fa fa-question-circle"></span></a>
 				</div>
 			</div>

@@ -114,7 +114,7 @@
 										$entries = $db->getEntries();
 									}
 									foreach($entries as $entry){ ?>						
-								<div class="circumplexFood" style="left:<?=$entry['xCoor'];?>%;top:<?=$entry['yCoor']-5;?>%">
+								<div class="circumplexFood" style="left:<?=$entry['xCoor']-3;?>%;top:<?=$entry['yCoor']-3;?>%">
 									<h5 class="circumplexFoodName"><?=$entry['food_name'];?></h5>
 									<img src="data:image/jpeg;base64,<?=$db->displayImage($entry['item_id']); ?>" style="border:<?= $db->getBorderColor($entry['emotion_id']); ?>;" class="circumplexFoodImg" />
 								</div>
