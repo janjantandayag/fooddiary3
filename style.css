@@ -221,8 +221,11 @@ input, select {
 }
 .mainPage header{
     background:#ffffff;
-    padding:15px 0;
-    position: relative;
+    position: fixed;
+    width:100%;
+    padding:5px 0;
+    z-index:100;
+    top:0;
     -webkit-box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
     -moz-box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
     box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
@@ -321,6 +324,7 @@ input, select {
     background:#edb727;
     width: 100%;
     text-align: center;
+    height:100vh;
 }
 #mobile a:hover{
     color:#000;
@@ -362,7 +366,16 @@ input, select {
     text-transform: lowercase;
     font-weight: bold;
     color: #b9b9b9;
+    font-size:90%;
 }
+.showAllRange:hover{
+    font-weight: bold;
+    color:#4d4b48;
+    padding-left:25px;
+    text-decoration: none;
+    transition: .5s all;
+}
+
 /* VERTICAL LINE */
 .circumplexHeading--helper{
     display: inline-block;
@@ -713,7 +726,7 @@ input, select {
 .mealContainer:hover{
 }
 #breadcrumb{
-    margin-top:20px;
+    margin-top:140px;
 }
 .breadcrumbContainer{
     background:#fff;
@@ -737,6 +750,13 @@ input, select {
     margin-right:10px;
     font-family: novaThin;
     color:#b5b4b2;
+}
+.breadcrumb-link:hover{
+    color:#53514e;
+    text-decoration: none;
+    margin-left:5px;
+    font-family: semiBold;
+    transition: .3s all;
 }
 .breadcrumb-link-active{
     font-weight: bold;
@@ -1226,9 +1246,9 @@ input[type='file']{
     padding: 8px;
     color: #fff;
     border: none;
-    font-family: novaThin;
+    font-family: semiBold;
     text-transform: uppercase;
-    margin-top: 26px;
+    margin-top: 22px;
     margin-left:-10px;
 }
 .meaning-emotion{
@@ -1397,7 +1417,7 @@ input[type='file']{
     background:#fff;
     margin-left:0px;
     margin-right:0px;
-    margin-top:35px;    
+    margin-top:140px;
     -webkit-box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
     -moz-box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
     box-shadow: 0px 26px 30px -13px rgba(203,199,199,1);
@@ -1521,6 +1541,14 @@ input[type='file']{
 .inputEmpty{
     border: 1px solid red;
 }
+.no-entry{
+    padding:30px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: semiBold;
+    border:1px solid red;
+    margin-top:25px;
+}
 @media(max-width:375px){
     .user-datecontainerMobile{
         display: block;
@@ -1535,9 +1563,6 @@ input[type='file']{
         margin-right:0px;
     }
 }
-
-
-
 @media(max-width:265px){
     .form--header h1{
         font-size: 150%;
@@ -1556,10 +1581,7 @@ input[type='file']{
     .entryLevel{
         font-size:100%;
         transition: 1s all;
-    }
-    .mealLabelName{
-        font-size: 100%;
-        transition: 1s all;
+    }: 1s all;
     }
 }
 @media(max-width:625px){
@@ -1632,6 +1654,10 @@ input[type='file']{
 @media(max-width:425px){
     .selectPhoto45, .selectPhoto90{
         display: none;
+    }
+
+    .fc-title{
+        font-size:75%;
     }
 }
 @media screen and (max-width:1200px){
@@ -1771,6 +1797,24 @@ input[type='file']{
         padding-bottom: 5px;
         margin-top:20px;
     }
+}
+@media screen and (max-width:437px){
+    .rangeShowDateHeader{
+        display: block;
+        margin-bottom: 5px;
+    }
+    .rangeStart, .rangeEnd{
+        margin-left:15px;
+    }
+    .rangeSubmit{
+        margin-top:0px;
+        transition: 1s all;
+    }
+}
+@media screen and (max-width: 349px){    
+    .mealLabelName{
+        font-size: 140%;
+        transition
 }
 
 

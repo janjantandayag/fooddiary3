@@ -316,6 +316,21 @@ Class Database {
  		$result = $stmt->fetch();
  		return $result['photo'];
 	}
+	public function checkUri($uri){
+		return substr(strtok($uri,'?'), 12);
+	}
+	public function isActive($currentPage,$page,$view){
+		foreach($page as $value){			
+			if($currentPage == $value){
+				if($view == 'web'){
+					return "class='navActive'";
+				}
+				if($view == 'mobile'){
+					return "class='mobile-navActive'";
+				}
+			}
+		}
+	}
 }
 
 $db = new Database;

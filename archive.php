@@ -13,45 +13,8 @@
     <link rel="stylesheet" href="calendar/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="calendar/fullcalendar/fullcalendar.print.css" media="print">
 </head>
-<body class="mainPage">
-	<header>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="left-col">
-            <img src="img/logo.png">
-            <h1 class="foodAppName" >Food Diary App</h1>
-          </div>
-          <div class="right-col">
-            <ul id="topNav">
-              <li  class="navActive"><a href="archive.php"><span class="fa fa-calendar-o"></span>archive</a></li>
-              <li><a href="add-entry.php"><span class="fa fa-plus-square-o"></span>add entry</a></li> 
-              <li><a href="dashboard.php"><span class="fa fa-dashboard"></span>dashboard</a></li>
-              <li><a href="documentation.php" target="_blank"><span class="fa fa-list-ol"></span>steps</a></li>
-              <li  class="userNav"><a href="#"><span class="fa fa-user"></span> Hello, <?= $_SESSION['name'] ?></a>
-                            <div class="dropdown-content">
-                  <a href="setting.php"><span class="fa fa-gear"></span>Settings</a>
-                  <a href="database/logout.php"><span class="fa fa-power-off"></span>Logout</a>
-                </div>
-              </li>
-            </ul> 
-          </div>
-          <div>
-            <a href="javascript:void(0);" onclick="myFunction();" class="icon">&#9776;</a>
-                <ul  id="mobile"  class="displayNone">
-                    <li><a href="archive.php"><span class="fa fa-calendar-o"></span> archive</a></li>
-                    <li  class="mobile-navActive"><a href="add-entry.php"><span class="fa fa-plus-square-o"></span> add entry</a>  </li>   
-                    <li><a href="dashboard.php"><span class="fa fa-dashboard"></span> dashboard</a></li>
-              <li><a href="documentation.php" target="_blank"><span class="fa fa-list-ol"></span> steps</a></li>
-                    <li><a href="setting.php"><span class="fa fa-gear"></span> setting</a></li>
-                    <li><a href="database/logout.php"><span class="fa fa-power-off"></span> <?= $_SESSION['name'] ?>, logout</a>
-                    </li>
-                </ul>   
-            </div>
-        </div>
-      </div>
-    </div>
-  </header>
+<body class="mainPage">  
+  <?php include('include/header.php'); ?>
 	<section id="breadcrumb">
 		<div class="container">
 			<div class="row breadcrumbContainer">
@@ -67,7 +30,7 @@
 		<div class="container">
 			<div class="row archive-bodyContainer">
 				<div class="calendarHeader">					
-					<p class="circumplexHeading--helper" style="margin-left:15px"><span style="color:red;font-weight: bold;font-style:normal;font-family: semiBold">NOTE:</span> Just click on the date to add/view entry</p>                    
+					<p class="circumplexHeading--helper" style="margin-left:15px"><span style="color:red;font-weight: bold;font-style:normal;font-family: semiBold">NOTE:</span> Just click on the date to add or view entry</p>                    
 				</div>
 				<div class="col-md-12">
 					<div id="calendar"></div>
