@@ -698,6 +698,7 @@ input, select {
     font-family: semiBold;
     color:#ef4820;
     border:1px solid #ef4820;
+    margin-bottom: 10px;
 }
 .addMore{
     font-size: 100%;
@@ -721,6 +722,7 @@ input, select {
     width: 100%;
 }
 .mealContainer{
+    margin-top:30px;
     transition: .5s all;
 }
 .mealContainer:hover{
@@ -1650,6 +1652,10 @@ input[type='file']{
         padding: 0px 5px 0px 5px;
         height:40px;
     }
+    .breakfast{
+        font-size:150%;
+    }
+
 }
 @media(max-width:425px){
     .selectPhoto45, .selectPhoto90{

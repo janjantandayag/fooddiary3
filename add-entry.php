@@ -58,7 +58,7 @@
 					foreach($mealId as $id):
 				?>				
 				<div class="col-md-3 col-sm-6 mealContainer">
-					<p class="mealName"><?= $db->getMealName($id) ?></p>
+					<p class="mealName breakfast"><?= $db->getMealName($id) ?></p>
 					<a href="circumplex.php"  onClick='storeMealType(<?=$id?>)' title="Add Entry" class="addEntryIcon"><span class="fa fa-plus"></span></a>
 					<div class="mealQuantityContainer">
 						<p class="mealQuantity"><?= $db->getMealCount($id) ?></p>
