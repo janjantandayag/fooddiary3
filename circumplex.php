@@ -21,8 +21,9 @@
 				<div class="col-md-12">
 					<a href="dashboard.php" class="breadcrumb-link"><span class="fa fa-dashboard"></span> dashboard</a>
 					<a href="add-entry.php"  class="breadcrumb-link"><span class="fa fa-plus-square-o"></span> add entry</a>
-					<a href="#"  class="breadcrumb-link  breadcrumb-link-active">STEP 1</a>
+					<a href="#"  class="breadcrumb-link  breadcrumb-link-active">step 1</a>
 					<a href="#" id="help-circumplex" data-toggle="modal" title="Click for further info" data-target="#myModal"><span class="fa fa-question-circle"></span></a>
+					<p class="date-entry"><?= strtolower($_SESSION['echodate']); ?> : <?= $db->checkMeal($_SESSION['detail']['mealType']); ?></p>
 				</div>
 			</div>
 		</div>
@@ -44,12 +45,12 @@
 			<div class="container">
 				<div class="row circumplexBody">
 					<div class="col-md-7 ">
-						<div class="circumplexModel" id="circumplexModel">			
+						<div class="circumplexModel" id="circumplexModel">
 							<div class="label top">Pumped</div>
 							<div class="label left">Negative</div>
 							<div class="label right">Positive</div>
 							<div class="label bottom">Relaxed</div>
-							<div id="marker" id="marker" class="marker"></div>
+							<div id="marker" class="marker"></div>
 						</div>
 					</div>
 					<div class="col-md-5">
@@ -121,8 +122,8 @@
             var posY = (e.pageY - $(this).offset().top)/$(this).width()*100;
             
             mark = document.getElementById('marker');
-          	mark.style.top = posY-4.5+ '%';
-           	mark.style.left = posX-4.5 + '%';    
+          	mark.style.top = posY-3+ '%';
+           	mark.style.left = posX-2 + '%';    
 
             var x = coordX.toFixed(1);
             var y = coordY.toFixed(1);	

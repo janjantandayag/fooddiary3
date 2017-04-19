@@ -136,7 +136,6 @@
 $("#showItem").click(function(){
     $(".itemView").toggle();
 });
-
 function storeMealType(mealId){
 	$.ajax({
 		type: 'GET',

@@ -319,6 +319,17 @@ Class Database {
 	public function checkUri($uri){
 		return substr(strtok($uri,'?'), 12);
 	}
+	public function checkMeal($id){
+		if($id == 1){
+			return 'breakfast';
+		}if($id == 2){
+			return 'lunch';
+		}if($id == 3){
+			return 'dinner';
+		}if($id == 4){
+			return 'snack';
+		}
+	}
 	public function isActive($currentPage,$page,$view){
 		foreach($page as $value){			
 			if($currentPage == $value){

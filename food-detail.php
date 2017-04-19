@@ -71,10 +71,11 @@
 			<div class="row breadcrumbContainer">
 				<div class="col-md-12">
 					<a href="dashboard.php" class="breadcrumb-link"><span class="fa fa-dashboard"></span> dashboard</a>
-					<a href="add-entry.php"  class="breadcrumb-link"><span class="fa fa-plus-square-o"></span> add entry</a>
-					<a href="circumplex.php"  class="breadcrumb-link">STEP 1</a>
-					<a href="#"  class="breadcrumb-link  breadcrumb-link-active">STEP 2</a>
+					<a href="add-entry.php"  class="breadcrumb-link"><span class="fa fa-plus-square-o"></span> add entry </a>
+					<a href="circumplex.php"  class="breadcrumb-link">step 1</a>
+					<a href="#"  class="breadcrumb-link  breadcrumb-link-active">step 2</a>
 					<a href="#" id="help-circumplex" data-toggle="modal" title="Click for further info" data-target="#myModal"><span class="fa fa-question-circle"></span></a>
+					<p class="date-entry"><?= strtolower($_SESSION['echodate']); ?> : <?= $db->checkMeal($_SESSION['detail']['mealType']); ?></p>
 				</div>
 			</div>
 		</div>
@@ -93,12 +94,14 @@
 							</div>
 						</div>
 						<div class="gallery">
-						</div>				
-						<div class="col-md-12">						
-						  	<input type="submit" name="addDiary" class="detailSubmit" value="Add to Diary" disabled style="display: none" />
-						</div>
+						</div>		
+				</div>					
+				<div class="row">		
+					<div class="col-md-12">						
+					  	<input type="submit" name="addDiary" class="detailSubmit" value="Add to Diary" disabled style="display: none" />
+					</div>	
 					</form>		
-				</div>	
+				</div>			
 			</div>
 		</div>
 	</div>
